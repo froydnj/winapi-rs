@@ -21,7 +21,7 @@ IFDEF!{
 pub const MAX_NATURAL_ALIGNMENT: usize = 4;
 pub const MEMORY_ALLOCATION_ALIGNMENT: usize = 8;
 }
-#[cfg(any(target_arch = "x86_64", target_arch = "aarch64"))]
+#[cfg(target_pointer_width = "64")]
 IFDEF!{
 pub const MAX_NATURAL_ALIGNMENT: usize = 8;
 pub const MEMORY_ALLOCATION_ALIGNMENT: usize = 16;
@@ -113,7 +113,7 @@ STRUCT!{struct GROUP_AFFINITY {
 pub type PGROUP_AFFINITY = *mut GROUP_AFFINITY;
 #[cfg(target_arch = "x86")]
 pub const MAXIMUM_PROC_PER_GROUP: BYTE = 32;
-#[cfg(any(target_arch = "x86_64", target_arch = "aarch64"))]
+#[cfg(target_pointer_width = "64")]
 pub const MAXIMUM_PROC_PER_GROUP: BYTE = 64;
 pub const MAXIMUM_PROCESSORS: BYTE = MAXIMUM_PROC_PER_GROUP;
 pub type HANDLE = *mut c_void;
@@ -2308,7 +2308,7 @@ STRUCT!{struct ACL_SIZE_INFORMATION {
 pub type PACL_SIZE_INFORMATION = *mut ACL_SIZE_INFORMATION;
 pub const SECURITY_DESCRIPTOR_REVISION: DWORD = 1;
 pub const SECURITY_DESCRIPTOR_REVISION1: DWORD = 1;
-#[cfg(any(target_arch = "x86_64", target_arch = "aarch64"))]
+#[cfg(target_pointer_width = "64")]
 pub const SECURITY_DESCRIPTOR_MIN_LENGTH: usize = 40;
 #[cfg(target_arch = "x86")]
 pub const SECURITY_DESCRIPTOR_MIN_LENGTH: usize = 20;
@@ -5722,7 +5722,7 @@ pub type PIMAGE_OPTIONAL_HEADER64 = *mut IMAGE_OPTIONAL_HEADER64;
 pub const IMAGE_NT_OPTIONAL_HDR32_MAGIC: WORD = 0x10b;
 pub const IMAGE_NT_OPTIONAL_HDR64_MAGIC: WORD = 0x20b;
 pub const IMAGE_ROM_OPTIONAL_HDR_MAGIC: WORD = 0x107;
-#[cfg(any(target_arch = "x86_64", target_arch = "aarch64"))]
+#[cfg(target_pointer_width = "64")]
 IFDEF!{
 pub type IMAGE_OPTIONAL_HEADER = IMAGE_OPTIONAL_HEADER64;
 pub type PIMAGE_OPTIONAL_HEADER = PIMAGE_OPTIONAL_HEADER64;
@@ -5751,7 +5751,7 @@ STRUCT!{struct IMAGE_ROM_HEADERS {
     OptionalHeader: IMAGE_ROM_OPTIONAL_HEADER,
 }}
 pub type PIMAGE_ROM_HEADERS = *mut IMAGE_ROM_HEADERS;
-#[cfg(any(target_arch = "x86_64", target_arch = "aarch64"))]
+#[cfg(target_pointer_width = "64")]
 IFDEF!{
 pub type IMAGE_NT_HEADERS = IMAGE_NT_HEADERS64;
 pub type PIMAGE_NT_HEADERS = PIMAGE_NT_HEADERS64;
@@ -6517,7 +6517,7 @@ BITFIELD!{IMAGE_TLS_DIRECTORY32 Characteristics: DWORD [
     Reserved1 set_Reserved1[24..32],
 ]}
 pub type PIMAGE_TLS_DIRECTORY32 = *mut IMAGE_TLS_DIRECTORY32;
-#[cfg(any(target_arch = "x86_64", target_arch = "aarch64"))]
+#[cfg(target_pointer_width = "64")]
 IFDEF!{
 pub const IMAGE_ORDINAL_FLAG: ULONGLONG = IMAGE_ORDINAL_FLAG64;
 #[inline]
@@ -6681,7 +6681,7 @@ STRUCT!{#[repr(packed)] struct IMAGE_DYNAMIC_RELOCATION64_V2 {
     Flags: DWORD,
 }}
 pub type PIMAGE_DYNAMIC_RELOCATION64_V2 = *mut IMAGE_DYNAMIC_RELOCATION64_V2;
-#[cfg(any(target_arch = "x86_64", target_arch = "aarch64"))]
+#[cfg(target_pointer_width = "64")]
 IFDEF!{
 pub type IMAGE_DYNAMIC_RELOCATION = IMAGE_DYNAMIC_RELOCATION64;
 pub type PIMAGE_DYNAMIC_RELOCATION = PIMAGE_DYNAMIC_RELOCATION64;
@@ -6796,7 +6796,7 @@ STRUCT!{struct IMAGE_LOAD_CONFIG_DIRECTORY64 {
     EnclaveConfigurationPointer: ULONGLONG,
 }}
 pub type PIMAGE_LOAD_CONFIG_DIRECTORY64 = *mut IMAGE_LOAD_CONFIG_DIRECTORY64;
-#[cfg(any(target_arch = "x86_64", target_arch = "aarch64"))]
+#[cfg(target_pointer_width = "64")]
 IFDEF!{
 pub type IMAGE_LOAD_CONFIG_DIRECTORY = IMAGE_LOAD_CONFIG_DIRECTORY64;
 pub type PIMAGE_LOAD_CONFIG_DIRECTORY = PIMAGE_LOAD_CONFIG_DIRECTORY64;
@@ -7174,7 +7174,7 @@ extern "system" {
         ReturnValue: PVOID,
     );
 }
-#[cfg(any(target_arch = "x86_64", target_arch = "aarch64"))]
+#[cfg(target_pointer_width = "64")]
 extern "system" {
     pub fn RtlAddFunctionTable(
         FunctionTable: PRUNTIME_FUNCTION,
@@ -7257,7 +7257,7 @@ STRUCT!{struct SLIST_ENTRY {
     Next: *mut SLIST_ENTRY,
 }}
 pub type PSLIST_ENTRY = *mut SLIST_ENTRY;
-#[cfg(any(target_arch = "x86_64", target_arch = "aarch64"))]
+#[cfg(target_pointer_width = "64")]
 IFDEF!{
 STRUCT!{struct SLIST_HEADER_s {
     Alignment: ULONGLONG,
